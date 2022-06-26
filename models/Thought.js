@@ -1,6 +1,29 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
 
+// Define a new schema name `reactionSchema`
+const reactionSchema = new mongoose.Schema({
+  reactionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    default: () => new mongoose.Types.ObjectId(),
+  },
+  reactionBody: {
+    type: String,
+    required: true,
+    maxlength: 280,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  createAt: {
+    type: Date,
+    default: Date.now,
+    get: (createdAtTimeStamp) =>
+      moment(createdAtTimeStamp).format("MMM DD, YYYY [at] hh:mm a"),
+  },
+});
+
 // Define a new schema named `thoughtSchema`
 const thoughtSchema = new mongoose.Schema({
   thoughtText: {
@@ -23,6 +46,26 @@ const thoughtSchema = new mongoose.Schema({
 });
 
 module.exports = Thought;
+
+// Reaction:
+
+//reactionId
+//// Use Mongoose's ObjectId data type
+//// Default value is set to a new ObjectId
+
+// reactionBody
+//// String
+//// Required
+//// 280 character maximum
+
+// username
+//// String
+//// Required
+
+// createdAt
+//// Date
+//// Set default value to the current timestamp
+//// Use a getter method to format the timestamp on query
 
 // Thought:
 
@@ -50,17 +93,3 @@ module.exports = Thought;
 // reactionId
 //// Use Mongoose's ObjectId data type
 //// Default value is set to a new ObjectId
-
-// reactionBody
-//// String
-//// Required
-//// 280 character maximum
-
-// username
-//// String
-//// Required
-
-// createdAt
-//// Date
-//// Set default value to the current timestamp
-//// Use a getter method to format the timestamp on query
