@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const {} = require("");
+const {} = require("../../controllers/users-controller");
 
 // GET all users.
 
