@@ -4,11 +4,23 @@ const { Users, Thoughts } = require("../models");
 module.exports = {
   // GET Get all uers
   getUsers(req, res) {
-    User.find()
+    Users.find()
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
   // GET Get a single user
+  getSingleUser(req, res) {
+    Users.findOne({ _id: req.params.userId })
+      .select("-__v")
+      .populate("friends")
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user found with that ID!" })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
   // POST Create a new user
   // PUT Update a user by _id
   // DELETE Remove a user by _id
