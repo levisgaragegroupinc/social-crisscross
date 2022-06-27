@@ -7,6 +7,7 @@ const {
   updateUser,
   deleteUser,
   addFriend,
+  deleteFriend,
 } = require("../../controllers/users-controller");
 
 // GET all users.

@@ -61,7 +61,7 @@ module.exports = {
 
   // POST Add new friend to user's friend list
   addFriend(req, res) {
-    Users.findByIdAndUpdate(
+    Users.findOneAndUpdate(
       { _id: req.params.id },
       { $push: { friends: params.friendId } },
       { new: true }
@@ -80,6 +80,24 @@ module.exports = {
   },
 
   // DELETE Remove a friend from a user's friend list
+  deleteFriend(req, res) {
+    Users.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: params.friendId } },
+      { new: true }
+    )
+      .populate({
+        path: "friends",
+        select: "-__v",
+      })
+      .select("-__v")
+      .then((dbUser) =>
+        !dbUser
+          ? res.status(404).json({ message: "No user found with that ID!" })
+          : res.json(dbUser)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
 
 // GET all users.
