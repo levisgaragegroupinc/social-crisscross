@@ -3,6 +3,11 @@ const { Users, Thoughts } = require("../models");
 
 module.exports = {
   // GET Get all uers
+  getUsers(req, res) {
+    User.find()
+      .then((users) => res.json(users))
+      .catch((err) => res.status(500).json(err));
+  },
   // GET Get a single user
   // POST Create a new user
   // PUT Update a user by _id
