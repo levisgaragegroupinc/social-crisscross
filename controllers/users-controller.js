@@ -22,6 +22,15 @@ module.exports = {
   },
 
   // POST Create a new user
+  createUser(req, res) {
+    Users.create({
+      username: req.body.username,
+      email: req.body.email,
+    })
+      .then((dbUser) => res.json(dbUser))
+      .catch((err) => res.status(500).json(err));
+  },
+
   // PUT Update a user by _id
   // DELETE Remove a user by _id
   // delete user's associated thoughts when user is deleted
