@@ -37,17 +37,31 @@ module.exports = {
       })
       .then((dbUser) =>
         !dbUser
-          ? res
-              .status(404)
-              .json({
-                message: "Cannot create thought! No user found with that ID!",
-              })
+          ? res.status(404).json({
+              message: "Cannot create thought! No user found with that ID!",
+            })
           : res.json(dbUser)
       )
       .catch((err) => res.status(500).json(err));
   },
 
   // PUT Update a thought by _id
+  updateThought(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { thoughtText: req.body.thoughtText, username: req.body.username },
+      { new: true }
+    )
+      .then((dbThought) =>
+        !dbThought
+          ? res.status(404).json({
+              message: "Cannot update thought!. No thought found with that ID!",
+            })
+          : res.json(dbThought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
   // DELETE Remove a thought by _id
   // POST Create a reaction
   // DELETE Remove a reaction by _id
