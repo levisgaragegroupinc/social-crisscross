@@ -19,6 +19,7 @@
   "homepage": "https://github.com/levisgaragegroupinc/social-crisscross#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "moment": "^2.29.3",
     "mongodb": "^4.7.0",
     "mongoose": "^6.4.0"
   }
