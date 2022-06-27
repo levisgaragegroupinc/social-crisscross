@@ -5,7 +5,7 @@ module.exports = {
   // GET Get all thoughts
   getAllThoughts(req, res) {
     Thought.find({})
-      .then((users) => res.json(users))
+      .then((dbThought) => res.json(dbThought))
       .catch((err) => res.status(500).json(err));
   },
 
@@ -14,15 +14,39 @@ module.exports = {
     Thought.findOne({ _id: req.params.thoughtId })
       .select("-__v")
       .populate("reactions")
-      .then((thought) =>
-        !thought
+      .then((dbThought) =>
+        !dbThought
           ? res.status(404).json({ message: "No thought found with that ID!" })
-          : res.json(thought)
+          : res.json(dbThought)
       )
       .catch((err) => res.status(500).json(err));
   },
 
   // POST Create a new thought
+  createThought(req, res) {
+    Thought.create({
+      ThoughtText: req.body.thoughtText,
+      username: req.body.username,
+    })
+      .then((dbThought) => {
+        return User.findOneAndUpdate(
+          { username: req.body.username },
+          { $addToSet: { thought: dbThought._id } },
+          { new: true }
+        );
+      })
+      .then((dbUser) =>
+        !dbUser
+          ? res
+              .status(404)
+              .json({
+                message: "Cannot create thought! No user found with that ID!",
+              })
+          : res.json(dbUser)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
   // PUT Update a thought by _id
   // DELETE Remove a thought by _id
   // POST Create a reaction

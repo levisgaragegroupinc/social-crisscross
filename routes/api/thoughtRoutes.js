@@ -1,6 +1,9 @@
 const router = require("express").Router();
 
-const {} = require("../../controllers/thoughts-controller");
+const {
+  getAllThoughts,
+  getSingleThought,
+} = require("../../controllers/thoughts-controller");
 
 // GET to get all thoughts.
 
