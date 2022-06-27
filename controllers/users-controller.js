@@ -1,16 +1,16 @@
 const { ObjectId } = require("mongoose").Types;
-const { Users, Thoughts } = require("../models");
+const { User, Thought } = require("../models");
 
 module.exports = {
   // GET Get all uers
   getUsers(req, res) {
-    Users.find()
+    User.find({})
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
   // GET Get a single user
   getSingleUser(req, res) {
-    Users.findOne({ _id: req.params.userId })
+    User.findOne({ _id: req.params.userId })
       .select("-__v")
       .populate("friends")
       .then((user) =>
@@ -23,7 +23,7 @@ module.exports = {
 
   // POST Create a new user
   createUser(req, res) {
-    Users.create({
+    User.create({
       username: req.body.username,
       email: req.body.email,
     })
@@ -48,7 +48,7 @@ module.exports = {
 
   // DELETE Remove a user by _id
   deleteUser(req, res) {
-    Users.findOneAndDelete({ _id: req.params.userId })
+    User.findOneAndDelete({ _id: req.params.userId })
       .then((dbUser) =>
         !dbUser
           ? res.status(404).json({ message: "No user found with that ID!" })
@@ -61,7 +61,7 @@ module.exports = {
 
   // POST Add new friend to user's friend list
   addFriend(req, res) {
-    Users.findOneAndUpdate(
+    User.findOneAndUpdate(
       { _id: req.params.id },
       { $push: { friends: params.friendId } },
       { new: true }
@@ -81,7 +81,7 @@ module.exports = {
 
   // DELETE Remove a friend from a user's friend list
   deleteFriend(req, res) {
-    Users.findOneAndUpdate(
+    User.findOneAndUpdate(
       { _id: req.params.userId },
       { $pull: { friends: params.friendId } },
       { new: true }

@@ -1,5 +1,5 @@
 const connection = require("../config/connection");
-const { Users, Thoughts } = require("../models");
+const { User, Thought } = require("../models");
 
 const usersSeeds = [
   {

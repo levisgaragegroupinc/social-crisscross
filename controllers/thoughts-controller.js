@@ -1,9 +1,27 @@
 const { ObjectId } = require("mongoose").Types;
-const { Users, Thoughts } = require("../models");
+const { User, Thought } = require("../models");
 
 module.exports = {
   // GET Get all thoughts
+  getAllThoughts(req, res) {
+    Thought.find({})
+      .then((users) => res.json(users))
+      .catch((err) => res.status(500).json(err));
+  },
+
   // GET Get a single thought by _id
+  getSingleThought(req, res) {
+    Thought.findOne({ _id: req.params.thoughtId })
+      .select("-__v")
+      .populate("reactions")
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought found with that ID!" })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
   // POST Create a new thought
   // PUT Update a thought by _id
   // DELETE Remove a thought by _id
