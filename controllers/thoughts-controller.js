@@ -1,6 +1,16 @@
 const { ObjectId } = require("mongoose").Types;
 const { Users, Thoughts } = require("../models");
 
+module.exports = {
+  // GET Get all thoughts
+  // GET Get a single thought by _id
+  // POST Create a new thought
+  // PUT Update a thought by _id
+  // DELETE Remove a thought by _id
+  // POST Create a reaction
+  // DELETE Remove a reaction by _id
+};
+
 // GET to get all thoughts.
 
 // GET to get a single thought by its _id.
