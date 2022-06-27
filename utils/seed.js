@@ -24,7 +24,7 @@ connection.once("open", async () => {
   // Drop existing
   await Thoughts.deleteMany({});
 
-  //Drip existing
+  // Drop existing
   await Users.deleteMany({});
 
   await Users.collection.insertMany(usersSeeds);
