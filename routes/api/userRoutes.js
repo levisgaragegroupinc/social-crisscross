@@ -1,5 +1,10 @@
 const router = require("express").Router();
 
+const {
+  getUsers,
+  getSingleUser,
+} = require("../../controllers/users-controller");
+
 // GET all users.
 
 // GET a single user by its _id and populated thought and friend data.

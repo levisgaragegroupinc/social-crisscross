@@ -1,6 +1,15 @@
-const router = require("express").Router();
+const { ObjectId } = require("mongoose").Types;
+const { Users, Thoughts } = require("../models");
 
-const {} = require("../../controllers/thoughts-controller");
+module.exports = {
+  // GET Get all thoughts
+  // GET Get a single thought by _id
+  // POST Create a new thought
+  // PUT Update a thought by _id
+  // DELETE Remove a thought by _id
+  // POST Create a reaction
+  // DELETE Remove a reaction by _id
+};
 
 // GET to get all thoughts.
 
@@ -16,5 +25,3 @@ const {} = require("../../controllers/thoughts-controller");
 // POST to create a reaction stored in a single thought's reactions array field.
 
 // DELETE to pull and remove a reaction by the reaction's reactionID value.
-
-module.exports = router;
