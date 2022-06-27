@@ -1,8 +1,6 @@
 const connection = require("../config/connection");
 const { Users, Thoughts } = require("../models");
 
-connection.on("error", (err) => err);
-
 const usersSeeds = [
   {
     username: "Dale",
@@ -17,6 +15,8 @@ const usersSeeds = [
     email: "lora@gmail.com",
   },
 ];
+
+connection.on("error", (err) => err);
 
 connection.once("open", async () => {
   console.log("connected");

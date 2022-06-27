@@ -32,6 +32,20 @@ module.exports = {
   },
 
   // PUT Update a user by _id
+  updateUser(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { username: req.body.username, email: req.body.email },
+      { new: true, runValidators: true }
+    )
+      .then((dbUser) =>
+        !dbUser
+          ? res.status(404).json({ message: "No user found with that ID!" })
+          : res.json(dbUser)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
   // DELETE Remove a user by _id
   // delete user's associated thoughts when user is deleted
   // POST Add new friend to user's friend list
