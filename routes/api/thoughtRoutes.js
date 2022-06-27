@@ -1,5 +1,7 @@
 const router = require("express").Router();
 
+const {} = require("");
+
 // GET to get all thoughts.
 
 // GET to get a single thought by its _id.

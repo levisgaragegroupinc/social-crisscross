@@ -1,5 +1,7 @@
 const router = require("express").Router();
 
+const {} = require("");
+
 // GET all users.
 
 // GET a single user by its _id and populated thought and friend data.
