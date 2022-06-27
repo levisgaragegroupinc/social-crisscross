@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 // Validate email
 var validateEmail = (email) => {
   let emailRegex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
@@ -6,7 +6,7 @@ var validateEmail = (email) => {
 };
 
 // Define a new schema named `userSchema`
-const UsersSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: {
     type: String,
     unique: true,
@@ -25,25 +25,25 @@ const UsersSchema = new mongoose.Schema({
   },
   thoughts: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Thoughts",
     },
   ],
   friends: [
     {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: SchemaTypes.ObjectId,
       ref: "Users",
     },
   ],
 });
 
-UsersSchema.virtual("friendCount").get(() => {
+userSchema.virtual("friendCount").get(() => {
   return this.friends.length;
 });
 
-const Users = model("Users", UsersSchema);
+const User = model("user", userSchema);
 
-module.exports = Users;
+module.exports = User;
 
 // User:
 

@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 const moment = require("moment");
 
 // Define a new schema name `reactionSchema`
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
   reactionId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     default: () => new mongoose.Types.ObjectId(),
   },
   reactionBody: {
@@ -25,7 +25,7 @@ const reactionSchema = new mongoose.Schema({
 });
 
 // Define a new schema named `thoughtSchema`
-const thoughtSchema = new mongoose.Schema({
+const thoughtSchema = new Schema({
   thoughtText: {
     type: String,
     required: true,
@@ -42,12 +42,12 @@ const thoughtSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reactions: [ReactionsSchema],
+  reactions: [reactionSchema],
 });
 
-const Thoughts = model("Thoughts", thoughtSchema);
+const Thought = model("thought", thoughtSchema);
 
-module.exports = Thoughts;
+module.exports = Thought;
 
 // Reaction:
 
