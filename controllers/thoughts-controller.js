@@ -94,20 +94,33 @@ module.exports = {
       { $addToSet: { reactions: req.body } },
       { new: true }
     )
-      .then((reaction) =>
-        !reaction
-          ? res
-              .status(404)
-              .json({
-                message:
-                  "Could not add reaction! No thought found with that ID!",
-              })
+      .then((dbReaction) =>
+        !dbReaction
+          ? res.status(404).json({
+              message: "Could not add reaction! No thought found with that ID!",
+            })
           : res.json("Reaction added successfully!")
       )
       .catch((err) => res.status(500).json(err));
   },
 
   // DELETE Remove a reaction by _id
+  deleteReaction(req, res) {
+    Thought.findOneAndRemove(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { new: true }
+    )
+      .then((dbReaction) =>
+        !dbReaction
+          ? res.status(404).json({
+              message:
+                "Could not delete reaction! No reaction found with that ID!",
+            })
+          : res.json("Reaction deleted successfully!")
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
 
 // GET to get all thoughts.
