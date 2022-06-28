@@ -67,12 +67,9 @@ module.exports = {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((dbThought) =>
         !thought
-          ? res
-              .status(404)
-              .json({
-                message:
-                  "Cannot delete thought! No thought found with that ID!",
-              })
+          ? res.status(404).json({
+              message: "Cannot delete thought! No thought found with that ID!",
+            })
           : User.findOneAndUpdate(
               { thought: req.params.thoughtId },
               { $pull: { thought: req.params.thoughtId } },
@@ -81,18 +78,35 @@ module.exports = {
       )
       .then((dbUser) =>
         !dbUser
-          ? res
-              .status(404)
-              .json({
-                message:
-                  "Could not delete thought! No thought found with that ID!",
-              })
+          ? res.status(404).json({
+              message:
+                "Could not delete thought! No thought found with that ID!",
+            })
           : res.json({ message: "Thought deleted successfully!" })
       )
       .catch((err) => res.status(500).json(err));
   },
 
   // POST Create a reaction
+  addReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $addToSet: { reactions: req.body } },
+      { new: true }
+    )
+      .then((reaction) =>
+        !reaction
+          ? res
+              .status(404)
+              .json({
+                message:
+                  "Could not add reaction! No thought found with that ID!",
+              })
+          : res.json("Reaction added successfully!")
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
   // DELETE Remove a reaction by _id
 };
 
