@@ -10,6 +10,15 @@ const {
   deleteFriend,
 } = require("../../controllers/users-controller");
 
+// api/users
+router.route("/").get(getUsers).post(createUser);
+
+// api/users/:userId
+router.route("/:userId").get(getSingleUser).put(updateUser).delete(deleteUser);
+
+// api/users/:userId/friends/friendId
+router.route("/:userId/friends/:friendId").post(addFriend).delete(deleteFriend);
+
 // GET all users.
 
 // GET a single user by its _id and populated thought and friend data.

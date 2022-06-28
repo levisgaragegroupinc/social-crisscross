@@ -8,6 +8,15 @@ const {
   deleteThought,
 } = require("../../controllers/thoughts-controller");
 
+// api/thoughts
+router.route("/").get(getAllThoughts).post(createThought);
+
+// api/thoughts/:thoughtid
+router
+  .route("/:thoughtId")
+  .get(getSingleThought)
+  .put(updateThought)
+  .delete(deleteThought);
 // GET to get all thoughts.
 
 // GET to get a single thought by its _id.
