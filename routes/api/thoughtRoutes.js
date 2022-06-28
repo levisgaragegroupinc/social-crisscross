@@ -5,6 +5,7 @@ const {
   getSingleThought,
   createThought,
   updateThought,
+  deleteThought,
 } = require("../../controllers/thoughts-controller");
 
 // GET to get all thoughts.
