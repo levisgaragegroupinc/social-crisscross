@@ -6,36 +6,44 @@ var validateEmail = (email) => {
 };
 
 // Define a new schema named `userSchema`
-const userSchema = new Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    validate: [validateEmail, "Please fill in a valid email address!"],
-    match: [
-      /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
-      "Please fill in a valid email address!",
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      validate: [validateEmail, "Please fill in a valid email address!"],
+      match: [
+        /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+        "Please fill in a valid email address!",
+      ],
+    },
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thoughts",
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
     ],
   },
-  thoughts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Thoughts",
+  {
+    toJSON: {
+      virtuals: true,
     },
-  ],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-});
+    id: false,
+  }
+);
 
 userSchema.virtual("friendCount").get(() => {
   return this.friends.length;
