@@ -5,11 +5,57 @@ module.exports = {
   // GET Get all uers
   getUsers(req, res) {
     User.find({})
-      .then((dbUser) => res.json(dbUser))
-      .catch((err) => res.status(500).json(err));
+      .populate({
+        path: "thoughts",
+        select: "-__v",
+      })
+      .populate({
+        path: "friends",
+        select: "-__v",
+      })
+      .select("-__v")
+      .then((dbUser) => res.json({ dbUser }))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   },
 
-  // GET Get a single user
+  // getUsers(req, res) {
+  //   User.find({})
+  //     // populate users thoughts
+  //     .populate({
+  //       path: "thoughts",
+  //       select: "-__v",
+  //     })
+  //     // populate user friends
+  //     .populate({
+  //       path: "friends",
+  //       select: "-__v",
+  //     })
+  //     .select("-__v")
+  //     .then((dbUsersData) => res.json(dbUsersData))
+  //     .catch((err) => {
+  //       console.log(err);
+  //       res.status(500).json(err);
+  //     });
+  // },
+
+  // getUsers(req, res) {
+  //   User.find()
+  //     .then(async (dbUser) => {
+  //       const userObj = {
+  //         dbUser,
+  //       };
+  //       return res.json(userObj);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       return res.status(500).json(err);
+  //     });
+  // },
+
+  // GET Get a single user: !working
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select("-__v")
@@ -17,18 +63,51 @@ module.exports = {
       .then((dbUser) =>
         !dbUser
           ? res.status(404).json({ message: "No user found with that ID!" })
-          : res.json(dbUser)
+          : res.json({ dbUser })
       )
       .catch((err) => res.status(500).json(err));
   },
 
+  // getSingleUser(req, res) {
+  //   User.findOne({ _id: req.params.userId })
+  //     .select("-__v")
+  //     .lean()
+  //     .then(async (dbUser) =>
+  //       !dbUser
+  //         ? res.status(404).json({ message: "No user found with that ID!" })
+  //         : res.json({ dbUser })
+  //     )
+  //     .catch((err) => {
+  //       console.log(err);
+  //       return res.status(500).json(err);
+  //     });
+  // },
+
   // POST Create a new user
+  // createUser(req, res) {
+  //   User.create({
+  //     username: req.body.username,
+  //     email: req.body.email,
+  //   })
+  //     .then((dbUser) => res.json(dbUser))
+  //     .catch((err) => res.status(400).json(err));
+  // },
+
+  // createUser({ body }, res) {
+  //   User.create(body)
+  //     .then((dbUser) => res.json(dbUser))
+  //     .catch((err) => res.status(400).json(err));
+  // },
+
+  // createUser(req, res) {
+  //   User.create(req.body)
+  //     .then((user) => res.json(user))
+  //     .catch((err) => res.status(500).json(err));
+  // },
+
   createUser(req, res) {
-    User.create({
-      username: req.body.username,
-      email: req.body.email,
-    })
-      .then((dbUser) => res.json(dbUser))
+    User.create(req.body)
+      .then((student) => res.json(student))
       .catch((err) => res.status(500).json(err));
   },
 
