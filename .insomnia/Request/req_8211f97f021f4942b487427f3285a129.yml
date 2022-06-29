@@ -1,0 +1,26 @@
+_id: req_8211f97f021f4942b487427f3285a129
+type: Request
+parentId: fld_590a0173882a495183d54bcb5650e72e
+modified: 1656529100478
+created: 1656529081742
+url: http://localhost:3001/api/thoughts
+name: Create thought
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: '{"thoughtText": "Thoughts are the best", "username": "jared"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5530e92171094fedbe4cef1e347bfe65
+authentication: {}
+metaSortKey: -1656529081742
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

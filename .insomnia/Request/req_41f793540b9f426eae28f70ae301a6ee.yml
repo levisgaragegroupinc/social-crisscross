@@ -1,0 +1,26 @@
+_id: req_41f793540b9f426eae28f70ae301a6ee
+type: Request
+parentId: fld_4f76c9d4ae874d2f8a06127ba300a227
+modified: 1656528600379
+created: 1656528573251
+url: http://localhost:3001/api/users
+name: Find all users
+description: ""
+method: GET
+body:
+  mimeType: application/json
+  text: '{"username": "gared"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_ec13ec26d8774213ad0273cc21e2dd81
+authentication: {}
+metaSortKey: -1653819054851
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

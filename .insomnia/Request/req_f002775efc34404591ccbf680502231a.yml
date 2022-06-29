@@ -1,0 +1,26 @@
+_id: req_f002775efc34404591ccbf680502231a
+type: Request
+parentId: fld_4f76c9d4ae874d2f8a06127ba300a227
+modified: 1656528763930
+created: 1656528751447
+url: http://localhost:3001/api/users
+name: Create user III
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: '{"username": "tiff", "email": "tiffany@gmail.com" }'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_6d41907ba5294b19851a81cb2f1bfdef
+authentication: {}
+metaSortKey: -1652972350302.875
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

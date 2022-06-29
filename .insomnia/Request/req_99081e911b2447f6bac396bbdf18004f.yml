@@ -1,0 +1,27 @@
+_id: req_99081e911b2447f6bac396bbdf18004f
+type: Request
+parentId: fld_8102b1b81f7241baabcb3b5b1907294e
+modified: 1656528947840
+created: 1656528786194
+url: http://localhost:3001/api/thoughts/thoughtId/
+name: Create Reaction
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: '{"reactionBody": "Commenting on this thought with my reaction",
+    "username": "jared"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_f06ec127c5d7428684ac93d968dfd034
+authentication: {}
+metaSortKey: -1656528786194
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

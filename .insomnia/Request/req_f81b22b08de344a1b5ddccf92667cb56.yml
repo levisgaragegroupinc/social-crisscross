@@ -1,0 +1,21 @@
+_id: req_f81b22b08de344a1b5ddccf92667cb56
+type: Request
+parentId: fld_590a0173882a495183d54bcb5650e72e
+modified: 1656529158710
+created: 1656529149338
+url: http://localhost:3001/api/thoughts/thoughtId
+name: Find thought by id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1656528860081
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

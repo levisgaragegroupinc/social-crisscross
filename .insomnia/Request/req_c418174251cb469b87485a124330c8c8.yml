@@ -1,0 +1,21 @@
+_id: req_c418174251cb469b87485a124330c8c8
+type: Request
+parentId: fld_8102b1b81f7241baabcb3b5b1907294e
+modified: 1656529041222
+created: 1656529024205
+url: http://localhost:3001/api/thoughts/thoughtid/reactionId
+name: Delete Reaction
+description: ""
+method: DELETE
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1656528647799.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

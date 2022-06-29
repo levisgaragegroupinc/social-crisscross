@@ -1,0 +1,26 @@
+_id: req_17bbc3f85d7e4b88acd2526427e8bddd
+type: Request
+parentId: fld_4f76c9d4ae874d2f8a06127ba300a227
+modified: 1656528736351
+created: 1656528695426
+url: http://localhost:3001/api/users
+name: Create user II
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: '{"username": "kuang", "email": "kuang@gmail.com" }'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_6d41907ba5294b19851a81cb2f1bfdef
+authentication: {}
+metaSortKey: -1653028797272.75
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

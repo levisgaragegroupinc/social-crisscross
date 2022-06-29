@@ -1,0 +1,21 @@
+_id: req_30298f7c64444d34a286b497785ccb70
+type: Request
+parentId: fld_4f76c9d4ae874d2f8a06127ba300a227
+modified: 1656528636987
+created: 1656528619909
+url: http://localhost:3001/api/users/userId
+name: Find user by id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1653367479092
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

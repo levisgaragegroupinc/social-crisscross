@@ -1,0 +1,26 @@
+_id: req_cb4fab97881c45fab21f431f2ff8d993
+type: Request
+parentId: fld_4f76c9d4ae874d2f8a06127ba300a227
+modified: 1656528598041
+created: 1656528527431
+url: http://localhost:3001/api/users/userId
+name: Update User
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: '{"username": "gared"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_ec13ec26d8774213ad0273cc21e2dd81
+authentication: {}
+metaSortKey: -1654722206369
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
