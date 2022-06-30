@@ -21,40 +21,6 @@ module.exports = {
       });
   },
 
-  // getUsers(req, res) {
-  //   User.find({})
-  //     // populate users thoughts
-  //     .populate({
-  //       path: "thoughts",
-  //       select: "-__v",
-  //     })
-  //     // populate user friends
-  //     .populate({
-  //       path: "friends",
-  //       select: "-__v",
-  //     })
-  //     .select("-__v")
-  //     .then((dbUsersData) => res.json(dbUsersData))
-  //     .catch((err) => {
-  //       console.log(err);
-  //       res.status(500).json(err);
-  //     });
-  // },
-
-  // getUsers(req, res) {
-  //   User.find()
-  //     .then(async (dbUser) => {
-  //       const userObj = {
-  //         dbUser,
-  //       };
-  //       return res.json(userObj);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       return res.status(500).json(err);
-  //     });
-  // },
-
   // GET Get a single user: !working
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
@@ -67,43 +33,6 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-
-  // getSingleUser(req, res) {
-  //   User.findOne({ _id: req.params.userId })
-  //     .select("-__v")
-  //     .lean()
-  //     .then(async (dbUser) =>
-  //       !dbUser
-  //         ? res.status(404).json({ message: "No user found with that ID!" })
-  //         : res.json({ dbUser })
-  //     )
-  //     .catch((err) => {
-  //       console.log(err);
-  //       return res.status(500).json(err);
-  //     });
-  // },
-
-  // POST Create a new user
-  // createUser(req, res) {
-  //   User.create({
-  //     username: req.body.username,
-  //     email: req.body.email,
-  //   })
-  //     .then((dbUser) => res.json(dbUser))
-  //     .catch((err) => res.status(400).json(err));
-  // },
-
-  // createUser({ body }, res) {
-  //   User.create(body)
-  //     .then((dbUser) => res.json(dbUser))
-  //     .catch((err) => res.status(400).json(err));
-  // },
-
-  // createUser(req, res) {
-  //   User.create(req.body)
-  //     .then((user) => res.json(user))
-  //     .catch((err) => res.status(500).json(err));
-  // },
 
   createUser(req, res) {
     User.create(req.body)
@@ -139,10 +68,10 @@ module.exports = {
 
   // delete user's associated thoughts when user is deleted
 
-  // POST Add new friend to user's friend list
+  // POST Add new friend to user's friend list. !working
   addFriend({ params }, res) {
     User.findOneAndUpdate(
-      { _id: params.id },
+      { _id: params.userId },
       { $push: { friends: params.friendId } },
       { new: true }
     )
