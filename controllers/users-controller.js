@@ -140,9 +140,9 @@ module.exports = {
   // delete user's associated thoughts when user is deleted
 
   // POST Add new friend to user's friend list
-  addFriend(req, res) {
+  addFriend({ params }, res) {
     User.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: params.id },
       { $push: { friends: params.friendId } },
       { new: true }
     )
