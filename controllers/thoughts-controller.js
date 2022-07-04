@@ -24,25 +24,25 @@ module.exports = {
 
   // POST Create a new thought
   createThought(req, res) {
-    console.log(`req.body.thoughtText ${req.body.thoughtText}`);
-    console.log(`req.body.username ${req.body.username}`);
+    // console.log(`req.body.thoughtText ${req.body.thoughtText}`);
+    // console.log(`req.body.username ${req.body.username}`);
     Thought.create({
-      ThoughtText: req.body.thoughtText,
+      thoughtText: req.body.thoughtText,
       username: req.body.username,
     })
-      .then((dbThought) => {
+      .then((thought) => {
         return User.findOneAndUpdate(
           { username: req.body.username },
-          { $addToSet: { thoughts: dbThought._id } },
+          { $addToSet: { thoughts: thought._id } },
           { new: true }
         );
       })
-      .then((dbUser) =>
-        !dbUser
+      .then((user) =>
+        !user
           ? res.status(404).json({
               message: "Cannot create thought! No user found with that ID!",
             })
-          : res.json(dbUser)
+          : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
