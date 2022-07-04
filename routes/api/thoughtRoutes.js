@@ -21,7 +21,8 @@ router
   .delete(deleteThought);
 
 // api/thoughts/:thoughtId/reactions
-router.route(".thoughtId/reactions").post(addReaction).delete(deleteReaction);
+router.route("/:thoughtId/reactions").post(addReaction);
+router.route("/:thoughtId/reactions/:reactionId").delete(deleteReaction);
 
 // GET to get all thoughts.
 

@@ -100,38 +100,20 @@ module.exports = {
   },
 
   // POST Create a reaction
-  // addReaction(req, res) {
-  //   Thought.findOneAndUpdate(
-  //     { _id: req.params.thoughtId },
-  //     { $addToSet: { reactions: req.body } },
-  //     { new: true }
-  //   )
-  //     .then((dbReaction) =>
-  //       !dbReaction
-  //         ? res.status(404).json({
-  //             message: "Could not add reaction! No thought found with that ID!",
-  //           })
-  //         : res.json("Reaction added successfully!")
-  //     )
-  //     .catch((err) => res.status(500).json(err));
-  // },
-
   addReaction(req, res) {
-    console.log(`Add reaction controller route.`);
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $addToSet: { reactions: req.body } },
       { new: true }
     )
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: "No thought with this id!" })
-          : res.json(`Reaction added`)
+      .then((dbReaction) =>
+        !dbReaction
+          ? res.status(404).json({
+              message: "Could not add reaction! No thought found with that ID!",
+            })
+          : res.json(dbReaction)
       )
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+      .catch((err) => res.status(500).json(err));
   },
 
   // DELETE Remove a reaction by _id
