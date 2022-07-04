@@ -24,6 +24,8 @@ module.exports = {
 
   // POST Create a new thought
   createThought(req, res) {
+    console.log(`req.body.thoughtText ${req.body.thoughtText}`);
+    console.log(`req.body.username ${req.body.username}`);
     Thought.create({
       ThoughtText: req.body.thoughtText,
       username: req.body.username,
@@ -31,7 +33,7 @@ module.exports = {
       .then((dbThought) => {
         return User.findOneAndUpdate(
           { username: req.body.username },
-          { $addToSet: { thought: dbThought._id } },
+          { $addToSet: { thoughts: dbThought._id } },
           { new: true }
         );
       })
@@ -72,7 +74,7 @@ module.exports = {
             })
           : User.findOneAndUpdate(
               { thought: req.params.thoughtId },
-              { $pull: { thought: req.params.thoughtId } },
+              { $pull: { thoughts: req.params.thoughtId } },
               { new: true }
             )
       )

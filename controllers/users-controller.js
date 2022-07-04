@@ -89,9 +89,9 @@ module.exports = {
   },
 
   // DELETE Remove a friend from a user's friend list
-  deleteFriend(req, res) {
+  deleteFriend({ params }, res) {
     User.findOneAndUpdate(
-      { _id: req.params.userId },
+      { _id: params.userId },
       { $pull: { friends: params.friendId } },
       { new: true }
     )
