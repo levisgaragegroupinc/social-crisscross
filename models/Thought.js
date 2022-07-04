@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 const moment = require("moment");
 
 // Define a new schema name `reactionSchema`
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
   reactionId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     default: () => new mongoose.Types.ObjectId(),
   },
   reactionBody: {
@@ -25,71 +25,40 @@ const reactionSchema = new mongoose.Schema({
 });
 
 // Define a new schema named `thoughtSchema`
-const thoughtSchema = new mongoose.Schema({
-  thoughtText: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
+const thoughtSchema = new Schema(
+  {
+    thoughtText: {
+      type: String,
+      required: true,
+      minlength: 1,
+      maxlength: 280,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (createdAtTimeStamp) =>
+        moment(createdAtTimeStamp).format("MMM DD, YYYY [at] hh:mm a"),
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    reactions: [reactionSchema],
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (createdAtTimeStamp) =>
-      moment(createdAtTimeStamp).format("MMM DD, YYYY [at] hh:mm a"),
-  },
-  username: {
-    type: String,
-    required: true,
-  },
-  reactions: [ReactionsSchema],
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+    id: false,
+  }
+);
+
+// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+thoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
 });
 
+const Thought = model("Thought", thoughtSchema);
+
 module.exports = Thought;
-
-// Reaction:
-
-//reactionId
-//// Use Mongoose's ObjectId data type
-//// Default value is set to a new ObjectId
-
-// reactionBody
-//// String
-//// Required
-//// 280 character maximum
-
-// username
-//// String
-//// Required
-
-// createdAt
-//// Date
-//// Set default value to the current timestamp
-//// Use a getter method to format the timestamp on query
-
-// Thought:
-
-// thoughtText
-//// String
-//// Required
-//// Must be between 1 and 280 characters
-
-// createdAt
-//// Date
-//// Set default value to the current timestamp
-//// Use a getter method to format the timestamp on query
-
-// username (The user that created this thought)
-//// String
-//// Required
-
-// reactions (These are like replies)
-//// Array of nested documents created with the reactionSchema
-
-// Schema Settings:
-// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
-
-// Reaction (SCHEMA, not a seperate model, goes inside the Thoughts model as a subdocument)
-// reactionId
-//// Use Mongoose's ObjectId data type
-//// Default value is set to a new ObjectId
