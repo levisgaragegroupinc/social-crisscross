@@ -3,23 +3,38 @@ const { User, Thought } = require("../models");
 
 module.exports = {
   // GET Get all thoughts
+  // getAllThoughts(req, res) {
+  //   console.log(`get all thoughts controller route.`);
+  //   Thought.find()
+  //     .then((thoughts) => res.json(thoughts))
+  //     .catch((err) => res.status(500).json(err));
+  // },
+
   getAllThoughts(req, res) {
-    Thought.find({})
-      .then((dbThought) => res.json(dbThought))
-      .catch((err) => res.status(500).json(err));
+    console.log(`get all thoughts controller route.`);
+    Thought.find([])
+      .then((thought) => res.json(thought))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   },
 
   // GET Get a single thought by _id
   getSingleThought(req, res) {
+    console.log(`get single thought by id. ${req.params.thoughtId}`);
     Thought.findOne({ _id: req.params.thoughtId })
       .select("-__v")
       .populate("reactions")
-      .then((dbThought) =>
-        !dbThought
+      .then((thought) =>
+        !thought
           ? res.status(404).json({ message: "No thought found with that ID!" })
-          : res.json(dbThought)
+          : res.json(thought)
       )
-      .catch((err) => res.status(500).json(err));
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   },
 
   // POST Create a new thought
@@ -54,12 +69,12 @@ module.exports = {
       { thoughtText: req.body.thoughtText, username: req.body.username },
       { new: true }
     )
-      .then((dbThought) =>
-        !dbThought
+      .then((thought) =>
+        !thought
           ? res.status(404).json({
               message: "Cannot update thought!. No thought found with that ID!",
             })
-          : res.json(dbThought)
+          : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },
